@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class World {
     @RequestMapping("/world")
     public String world(){
+        String hh = "你好哈哈";
         return "world你好";
     }
 }
