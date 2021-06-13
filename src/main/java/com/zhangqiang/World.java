@@ -10,6 +10,7 @@ public class World {
         String hh = "你好哈哈";
         String h2 = "你好哈哈2";
         String h23 = "你好哈哈3";
+        String h24 = "你好哈哈3";
         return "world你好";
     }
 }
