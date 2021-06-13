@@ -8,6 +8,7 @@ public class World {
     @RequestMapping("/world")
     public String world(){
         String hh = "你好哈哈";
+        String h2 = "你好哈哈2";
         return "world你好";
     }
 }
