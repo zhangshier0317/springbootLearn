@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangqiang.learn.mapper.TestMapper">
+    <!--select id名就是方法名，返回类型写类的全路径-->
+    <select id="getZq" resultType="com.zhangqiang.learn.bean.Zq">
+        select * from zq_test where id = #{id}
+    </select>
+    <resultMap id="test" type="com.zhangqiang.learn.bean.Zq">
+        <!--id定义主键底层会有优化，
+            column指定数据的一列
+            property指定数据库的一列对应javaBean的哪一列-->
+        <id column="id" property="id"></id>
+        <!--result定义普通列的映射类型-->
+<!--        <result column="name" property="name"></result>-->
+        <!--Zq类中有其他类名叫user，使用如下赋值方式即可-->
+        <result column="name" property="user.name"></result>
+        <!--其他不指定的列都会自动封装，规范起见写了resultMap就把所有映射都写上，方便维护-->
+    </resultMap>
+    <resultMap id="test1" type="com.zhangqiang.learn.bean.Zq">
+        <id column="id" property="id"></id>
+        <!--result定义普通列的映射类型-->
+        <!--Zq类中有其他类名叫user，property="user指定那个属性是级联查询对象
+        javaType指定类路径-->
+        <association property="user" javaType="com.zhangqiang.learn.bean.User">
+            <result column="name" property="name"></result>
+        </association>
+        <!--当查询结果返回有对象集合时使用下列方式关联
+        property指定对象集合在类中的名字，ofType指定集合对象类型-->
+        <collection property="pets" ofType="com.zhangqiang.learn.bean.Pet">
+            <result column="name" property="name"></result>
+        </collection>
+    </resultMap>
+    <select id="getAllZq" resultMap="test">
+            select * from zq_test
+        </select>
+    <!--<select id="getAllZq" resultType="com.zhangqiang.learn.bean.Zq">
+        select * from zq_test
+    </select>-->
+
+    <insert id="addZq" useGeneratedKeys="true" keyProperty="id">
+        insert into zq_test (name,gender) values (#{name},#{gender})
+    </insert>
+
+    <update id="updateZq">
+        update zq_test set name=#{name} where id=#{id}
+    </update>
+
+    <delete id="deleteZq">
+        delete from zq_test where id=#{id}
+    </delete>
+</mapper>
