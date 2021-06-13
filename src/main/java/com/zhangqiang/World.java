@@ -12,6 +12,7 @@ public class World {
         String h23 = "你好哈哈3";
         String h25 = "你好哈哈4";
         String h24 = "你好哈哈3";
+        String h256 = "你好哈哈3";
         return "world你好";
     }
 }
